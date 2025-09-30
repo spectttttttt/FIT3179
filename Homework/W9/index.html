@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Distribution of Towns Across Malaysian States</title>
+  <!-- Load Vega, Vega-Lite & Vega-Embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  
+  <script type="text/javascript">
+    vegaEmbed('#vis', 'map.json').then(function(result) {
+      // Access to Vega View API if needed
+    }).catch(console.error);
+  </script>
+</body>
+</html>
