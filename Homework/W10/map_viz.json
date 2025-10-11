@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1000,
+  "height": 600,
+  "projection": {"type": "mercator", "center": [0, 20], "scale": 150},
+  "params": [
+    {
+      "name": "CuisineSelect",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "American",
+          "Asian",
+          "Bar",
+          "Cafe",
+          "Chinese",
+          "French",
+          "Indian",
+          "Italian",
+          "Japanese",
+          "Mediterranean",
+          "Pizza",
+          "Pub",
+          "Seafood",
+          "Sushi",
+          "Thai",
+          "Vegetarian Friendly",
+          "Vegan Options"
+        ],
+        "name": "Filter by Cuisine: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "rect"},
+      "data": {"values": [{}]},
+      "encoding": {"color": {"value": "#f8f8f8"}}
+    },
+    {
+      "data": {"graticule": {"step": [10, 10]}},
+      "mark": {"type": "geoshape", "stroke": "#cccccc", "strokeWidth": 0.5}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/world-110m.json",
+        "format": {"type": "topojson", "feature": "countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#999"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/spectttttttt/FIT3179/main/Homework/W10/restaurant_data.json"
+      },
+      "transform": [
+        {"filter": "datum.LATITUDE != null && datum.LONGITUDE != null"},
+        {"calculate": "toNumber(datum.RATING)", "as": "RATING_NUM"},
+        {"calculate": "toNumber(datum.NUMBER_OF_REVIEWS)", "as": "REVIEWS_NUM"},
+        {"flatten": ["CUISINES"]},
+        {
+          "filter": "CuisineSelect == 'All' || lower(datum.CUISINES) == lower(CuisineSelect)"
+        },
+        {
+          "aggregate": [
+            {"op": "mean", "field": "RATING_NUM", "as": "AVG_RATING"},
+            {"op": "sum", "field": "REVIEWS_NUM", "as": "TOTAL_REVIEWS"},
+            {"op": "mean", "field": "LATITUDE", "as": "AVG_LAT"},
+            {"op": "mean", "field": "LONGITUDE", "as": "AVG_LON"}
+          ],
+          "groupby": ["DESTINATION"]
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "#333",
+        "strokeWidth": 0.3
+      },
+      "encoding": {
+        "longitude": {"field": "AVG_LON", "type": "quantitative"},
+        "latitude": {"field": "AVG_LAT", "type": "quantitative"},
+        "size": {
+          "field": "TOTAL_REVIEWS",
+          "type": "quantitative",
+          "scale": {"range": [200, 2500]},
+          "title": "Total Reviews"
+        },
+        "color": {
+          "field": "AVG_RATING",
+          "type": "quantitative",
+          "title": "Average Rating",
+          "scale": {"scheme": "goldred"}
+        },
+        "tooltip": [
+          {"field": "DESTINATION", "title": "City / Country"},
+          {"field": "AVG_RATING", "title": "Average Rating", "format": ".2f"},
+          {"field": "TOTAL_REVIEWS", "title": "Total Reviews", "format": ","}
+        ]
+      }
+    }
+  ],
+  "title": {
+    "text": "Global Restaurant Ratings by Cuisine Type",
+    "fontSize": 18,
+    "anchor": "middle"
+  },
+  "config": {}
+}
