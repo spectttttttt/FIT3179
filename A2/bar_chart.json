@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 500,
+  "data": {
+    "url": "https://spectttttttt.github.io/FIT3179/A2/restaurant_data.json"
+  },
+  "transform": [
+    {"filter": "datum.RATING != null"},
+    {"flatten": ["CUISINES"]},
+    {"calculate": "toNumber(datum.RATING)", "as": "RATING_NUM"},
+    {
+      "aggregate": [
+        {"op": "mean", "field": "RATING_NUM", "as": "AVG_RATING"},
+        {"op": "count", "field": "NAME", "as": "COUNT_RESTAURANTS"}
+      ],
+      "groupby": ["CUISINES"]
+    },
+    {"filter": "datum.CUISINES != null"},
+    {"window": [{"op": "rank", "as": "rank"}]},
+    {"filter": "datum.rank <= 10"},
+    {"sort": [{"field": "AVG_RATING", "order": "descending"}]}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 4, "opacity": 0.75},
+      "encoding": {
+        "y": {
+          "field": "CUISINES",
+          "type": "nominal",
+          "title": "Cuisine Type",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "AVG_RATING",
+          "type": "quantitative",
+          "title": "Average Rating",
+          "scale": {"domain": [4, 5], "nice": false, "zero": false},
+          "axis": {"tickCount": 10, "grid": true},
+          "stack": null
+        },
+        "color": {
+          "field": "AVG_RATING",
+          "type": "quantitative",
+          "title": "Avg Rating",
+          "scale": {"scheme": "goldred", "domain": [4, 5]}
+        },
+        "tooltip": [
+          {"field": "CUISINES", "title": "Cuisine"},
+          {"field": "AVG_RATING", "title": "Average Rating", "format": ".2f"},
+          {"field": "COUNT_RESTAURANTS", "title": "Number of Restaurants"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "dy": 0,
+        "fontSize": 11,
+        "color": "#333"
+      },
+      "encoding": {
+        "y": {"field": "CUISINES", "type": "nominal", "sort": "-x"},
+        "x": {"field": "AVG_RATING", "type": "quantitative"},
+        "text": {"field": "AVG_RATING", "type": "quantitative", "format": ".2f"}
+      }
+    }
+  ],
+  "title": {
+    "text": "Top 10 Cuisine Types by Average Rating (Global)",
+    "anchor": "middle",
+    "fontSize": 14
+  },
+  "config": {"axisX": {"domain": false}, "axisY": {"labelLimit": 140}}
+}

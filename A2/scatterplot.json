@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 450,
+  "data": {
+    "url": "https://spectttttttt.github.io/FIT3179/A2/restaurant_data.json"
+  },
+  "params": [
+    {
+      "name": "MinCount",
+      "value": 10,
+      "bind": {
+        "input": "range",
+        "min": 1,
+        "max": 800,
+        "step": 5,
+        "name": "Number of Restaurants: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.RATING != null"},
+    {"flatten": ["CUISINES"]},
+    {"calculate": "toNumber(datum.RATING)", "as": "RATING_NUM"},
+    {"calculate": "toNumber(datum.NUMBER_OF_REVIEWS)", "as": "REVIEWS_NUM"},
+    {
+      "aggregate": [
+        {"op": "mean", "field": "RATING_NUM", "as": "AVG_RATING"},
+        {"op": "mean", "field": "REVIEWS_NUM", "as": "AVG_REVIEWS"},
+        {"op": "count", "field": "NAME", "as": "COUNT_RESTAURANTS"}
+      ],
+      "groupby": ["CUISINES"]
+    },
+    {"filter": "datum.COUNT_RESTAURANTS >= MinCount"}
+  ],
+  "mark": {
+    "type": "circle",
+    "opacity": 0.8,
+    "stroke": "#333",
+    "strokeWidth": 0.4
+  },
+  "encoding": {
+    "x": {
+      "field": "AVG_REVIEWS",
+      "type": "quantitative",
+      "title": "Average Number of Reviews (Popularity)",
+      "scale": {"type": "log", "domainMin": 1},
+      "axis": {"grid": true}
+    },
+    "y": {
+      "field": "AVG_RATING",
+      "type": "quantitative",
+      "title": "Average Rating (Quality)",
+      "scale": {"domain": [3.5, 5]},
+      "axis": {"grid": true}
+    },
+    "size": {
+      "field": "COUNT_RESTAURANTS",
+      "type": "quantitative",
+      "title": "Number of Restaurants",
+      "bin": true,
+      "scale": {"range": [100, 800, 2000]}
+    },
+    "color": {
+      "field": "CUISINES",
+      "type": "nominal",
+      "scale": {"scheme": "category20"},
+      "legend": null
+    },
+    "tooltip": [
+      {"field": "CUISINES", "title": "Cuisine"},
+      {"field": "AVG_RATING", "title": "Avg Rating", "format": ".2f"},
+      {"field": "AVG_REVIEWS", "title": "Avg Reviews", "format": ".0f"},
+      {"field": "COUNT_RESTAURANTS", "title": "Restaurants"}
+    ]
+  },
+  "title": {
+    "text": "Cuisine Popularity vs Quality",
+    "anchor": "middle",
+    "fontSize": 14
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"labelFontSize": 12, "titleFontSize": 10}
+  }
+}

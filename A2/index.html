@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Restaurant Visualisation Dashboard</title>
+
+  <!-- Vega Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- Font + CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Global Restaurant Trends Dashboard</h1>
+    <p>Exploring the relationship between cuisine popularity, ratings, and global distribution</p>
+  </header>
+
+  <main>
+    <!-- Row 1: Map -->
+    <section class="row full">
+      <div class="chart-card">
+        <div class="chart-title">Distribution of Restaurants Across the World</div>
+        <p class="chart-desc">
+          This map highlights the global distribution of restaurants, showing which regions have the highest densities and cuisine diversity.
+        </p>
+        <div id="map"></div>
+      </div>
+    </section>
+
+    <!-- Row 2: Donut + Bar -->
+    <section class="row two-col">
+      <div class="chart-card">
+        <div class="chart-title">Cuisine Composition</div>
+        <p class="chart-desc">
+          The donut chart illustrates the proportion of restaurants by cuisine type, offering insight into global culinary representation.
+        </p>
+        <div id="donut"></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Top 10 Cuisines by Average Rating</div>
+        <p class="chart-desc">
+          This bar chart displays the top ten cuisines ranked by their average customer ratings, reflecting quality and satisfaction trends.
+        </p>
+        <div id="bar"></div>
+      </div>
+    </section>
+
+    <!-- Row 3: Scatter -->
+    <section class="row full">
+      <div class="chart-card">
+        <div class="chart-title">Cuisine Popularity vs Quality</div>
+        <p class="chart-desc">
+          The scatter plot compares cuisine popularity (number of restaurants) with quality (average ratings), revealing trends and outliers.
+        </p>
+        <div id="scatter"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Calvin Wijaya · FIT3179 Data Visualisation 2
+  </footer>
+
+  <!-- Vega Embeds -->
+  <script>
+    vegaEmbed('#map', 'map.json', { actions: false, width: 1000, height: 600 });
+    vegaEmbed('#donut', 'donut_chart.json', { actions: false, width: 400, height: 400 });
+    vegaEmbed('#bar', 'bar_chart.json', { actions: false, width: 700, height: 500 });
+    vegaEmbed('#scatter', 'scatterplot.json', { actions: false, width: 700, height: 450 });
+  </script>
+</body>
+</html>

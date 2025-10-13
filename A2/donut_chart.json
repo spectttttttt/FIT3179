@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "data": {
+    "url": "https://spectttttttt.github.io/FIT3179/A2/restaurant_data.json"
+  },
+  "transform": [
+    {"filter": "datum.RATING != null"},
+    {"calculate": "toNumber(datum.RATING)", "as": "RATING_NUM"},
+    {
+      "aggregate": [{"op": "count", "field": "NAME", "as": "RESTAURANT_COUNT"}],
+      "groupby": ["RATING_NUM"]
+    },
+    {"calculate": "format(datum.RATING_NUM, '.1f')", "as": "RATING_LABEL"}
+  ],
+  "mark": {"type": "arc", "innerRadius": 100, "outerRadius": 180},
+  "encoding": {
+    "theta": {
+      "field": "RESTAURANT_COUNT",
+      "type": "quantitative",
+      "title": "Count"
+    },
+    "color": {
+      "field": "RATING_LABEL",
+      "type": "nominal",
+      "title": "Rating",
+      "scale": {"scheme": "redyellowgreen"}
+    },
+    "tooltip": [
+      {"field": "RATING_LABEL", "title": "Rating"},
+      {"field": "RESTAURANT_COUNT", "title": "Number of Restaurants"}
+    ]
+  },
+  "view": {"stroke": null},
+  "title": {
+    "text": "Distribution of Restaurant Ratings",
+    "fontSize": 14,
+    "anchor": "middle"
+  },
+  "config": {}
+}
