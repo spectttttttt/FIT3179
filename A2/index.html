@@ -23,24 +23,25 @@
   <main>
     <!-- Map -->
     <div class="viz-card">
-      <div class="viz-content">
+      <div class="viz-content-column">
         <div class="viz-chart" id="map"></div>
-        <div class="viz-text">
+
+        <div class="map-description">
           <h3>Distribution of Restaurants Across the World</h3>
           <p>
-            The map illustrates restaurant concentrations around the world, revealing where culinary
-            cultures thrive most. Densely populated urban regions like East Asia, Europe, and North
-            America show strong restaurant presence, reflecting cultural diversity and high consumer demand.
-            Areas with sparse restaurant distribution often correspond to developing economies or less
-            urbanised regions, where access to international cuisines is limited.
+            The map illustrates restaurant concentrations around the world, revealing where culinary cultures thrive most.
+            Densely populated urban regions like East Asia, Europe, and North America show strong restaurant presence,
+            reflecting cultural diversity and high consumer demand. Areas with sparse restaurant distribution often correspond
+            to developing economies or less urbanised regions, where access to international cuisines is limited.
           </p>
           <p>
-            Overall, the visualisation underscores how geography, economy, and tourism shape global dining
-            availability, with major cities becoming central hubs for cross-cultural food experiences.
+            Overall, the visualisation underscores how geography, economy, and tourism shape global dining availability, with
+            major cities becoming central hubs for cross-cultural food experiences.
           </p>
         </div>
       </div>
     </div>
+
 
     <!-- Density -->
     <div class="viz-card">
@@ -120,7 +121,7 @@
 
 
   <script>
-    vegaEmbed('#map', 'map.json', { actions: false, width: 650, height: 450 });
+    vegaEmbed('#map', 'map.json', { actions: false, width: 1000, height: 500 });
     vegaEmbed('#density_chart', 'density_chart.json', { actions: false, width: 650, height: 400 });
     vegaEmbed('#bar', 'bar_chart.json', { actions: false, width: 650, height: 450 });
     vegaEmbed('#scatter', 'scatterplot.json', { actions: false, width: 650, height: 450 });
