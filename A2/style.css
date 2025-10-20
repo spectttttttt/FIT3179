@@ -2,7 +2,7 @@
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
-  background-color: #f9fafb;
+  background-color: #f5f7fa;
   color: #222;
   line-height: 1.6;
 }
@@ -28,96 +28,147 @@ header p {
   margin-top: 0.4rem;
 }
 
-/* ====== Layout ====== */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1400px; /* Ensures everything fits on one screen */
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-/* ====== Chart Cards ====== */
-.chart-card {
+/* ====== Visualization Card Layout ====== */
+.viz-card {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.chart-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-.chart-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #0077b6;
-  margin-bottom: 1rem;
-  border-left: 4px solid #00b4d8;
-  padding-left: 0.6rem;
-  align-self: flex-start;
-}
-
-/* ====== Sizes ====== */
-.wide {
-  width: 100%;
-  max-width: 1000px;
-}
-
-.small {
-  width: 100%;
-  max-width: 420px;
-}
-
-.medium {
-  width: 100%;
-  max-width: 700px;
-}
-
-/* ====== Grid for Donut + Bar ====== */
-.chart-grid {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 1.8rem auto;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.viz-content {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
   gap: 2rem;
-  flex-wrap: wrap;
   width: 100%;
-  max-width: 1200px;
+  min-height: 500px; 
+}
+
+.viz-chart {
+  flex: 1.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.viz-chart > div {
+  width: 100%;
+  max-width: 650px;
+  height: 100%;
+}
+
+.viz-text {
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  text-align: left;
+  margin-top: 0.5rem; 
+}
+
+
+.viz-text h3 {
+  color: #0077b6;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  border-left: 4px solid #00b4d8;
+  padding-left: 0.6rem;
+}
+
+.viz-text p {
+  text-align: justify;
+  font-size: 0.94rem;
+  color: #333;
+  margin-bottom: 0.7rem;
+  max-width: 420px;
+  line-height: 1.7;
+}
+
+/* ====== Horizontal Filter for Density Chart ====== */
+.vega-bindings {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  margin-bottom: 15px;
+}
+
+.vega-bindings input[type="checkbox"] {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.vega-bindings label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: color 0.2s ease;
+}
+
+.vega-bindings label:hover {
+  color: #0077b6;
 }
 
 /* ====== Footer ====== */
 footer {
   text-align: center;
-  padding: 1rem 0 2rem 0;
-  color: #666;
+  padding: 1.5rem 0 2rem 0;
+  color: #555;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
 }
 
+.footer-meta {
+  font-weight: 500;
+}
+
+.footer-links {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.footer-links a {
+  color: #00b4d8;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 4px;
+}
+
+.footer-links a:hover {
+  color: #0077b6;
+  text-decoration: underline;
+}
+
+
 /* ====== Responsive ====== */
-@media (max-width: 1200px) {
-  main {
-    padding: 1.5rem;
+@media (max-width: 1000px) {
+  .viz-content {
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
   }
 
-  .chart-grid {
-    flex-direction: column;
+  .viz-text {
+    text-align: center;
     align-items: center;
   }
 
-  .wide,
-  .medium,
-  .small {
-    max-width: 95vw;
+  .viz-text p {
+    max-width: 90%;
   }
 }

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Global Restaurant Visualisation Dashboard</title>
 
-  <!-- Vega Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -22,58 +21,109 @@
   </header>
 
   <main>
-    <!-- Row 1: Map -->
-    <section class="row full">
-      <div class="chart-card">
-        <div class="chart-title">Distribution of Restaurants Across the World</div>
-        <p class="chart-desc">
-          This map highlights the global distribution of restaurants, showing which regions have the highest densities and cuisine diversity.
-        </p>
-        <div id="map"></div>
+    <!-- Map -->
+    <div class="viz-card">
+      <div class="viz-content">
+        <div class="viz-chart" id="map"></div>
+        <div class="viz-text">
+          <h3>Distribution of Restaurants Across the World</h3>
+          <p>
+            The map illustrates restaurant concentrations around the world, revealing where culinary
+            cultures thrive most. Densely populated urban regions like East Asia, Europe, and North
+            America show strong restaurant presence, reflecting cultural diversity and high consumer demand.
+            Areas with sparse restaurant distribution often correspond to developing economies or less
+            urbanised regions, where access to international cuisines is limited.
+          </p>
+          <p>
+            Overall, the visualisation underscores how geography, economy, and tourism shape global dining
+            availability, with major cities becoming central hubs for cross-cultural food experiences.
+          </p>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Row 2: Donut + Bar -->
-    <section class="row two-col">
-      <div class="chart-card">
-        <div class="chart-title">Cuisine Composition</div>
-        <p class="chart-desc">
-          The donut chart illustrates the proportion of restaurants by cuisine type, offering insight into global culinary representation.
-        </p>
-        <div id="donut"></div>
-      </div>
+    <!-- Density -->
+    <div class="viz-card">
+      <div class="viz-content">
+        <div class="viz-chart" id="density_chart"></div>
+        <div class="viz-text">
+          <h3>Distribution of Restaurant Ratings by Cuisine</h3>
+          <p>
+            The density chart enables interactive exploration of rating patterns across cuisines. 
+            Most restaurants globally achieve ratings between 4.0 and 4.8, demonstrating high customer 
+            satisfaction across cultural contexts. However, certain cuisines stand out for exceptional
+            consistency and excellence.
+          </p>
+          <p>
+            Japanese and Italian cuisines often peak around 4.6, reflecting their consistent 
+            global appreciation and meticulous culinary standards. The chart also allows 
+            comparison across multiple cuisines simultaneously, offering insights into where diners 
+            experience the most satisfaction worldwide.
+          </p>
 
-      <div class="chart-card">
-        <div class="chart-title">Top 10 Cuisines by Average Rating</div>
-        <p class="chart-desc">
-          This bar chart displays the top ten cuisines ranked by their average customer ratings, reflecting quality and satisfaction trends.
-        </p>
-        <div id="bar"></div>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Row 3: Scatter -->
-    <section class="row full">
-      <div class="chart-card">
-        <div class="chart-title">Cuisine Popularity vs Quality</div>
-        <p class="chart-desc">
-          The scatter plot compares cuisine popularity (number of restaurants) with quality (average ratings), revealing trends and outliers.
-        </p>
-        <div id="scatter"></div>
+    <!-- Bar -->
+    <div class="viz-card">
+      <div class="viz-content">
+        <div class="viz-chart" id="bar"></div>
+        <div class="viz-text">
+          <h3>Top 10 Cuisines by Average Rating</h3>
+          <p>
+            The bar chart ranks the world’s most highly rated cuisines. 
+            Healthy cuisines dominate the leaderboard, followed by French and Pub styles — 
+            suggesting global appreciation for nutritious dining and casual yet high-quality 
+            dining environments.
+          </p>
+          <p>
+            The ranking suggests that cuisines rooted in traditional methods but open to innovation 
+            tend to achieve higher recognition, appealing to both local and international audiences.
+          </p>
+
+        </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Scatterplot -->
+    <div class="viz-card">
+      <div class="viz-content">
+        <div class="viz-chart" id="scatter"></div>
+        <div class="viz-text">
+          <h3>Cuisine Popularity vs Quality</h3>
+          <p>
+            The scatterplot compares average restaurant ratings with the number of reviews, showing how 
+            popularity interacts with perceived quality. Heavily reviewed cuisines indicate widespread appeal,
+            but high volume does not always guarantee top ratings.  
+          </p>
+          <p>
+            Smaller cuisines, though less common, often achieve higher average ratings due to craftsmanship 
+            and niche appeal. This suggests that authenticity, care, and dining experience play an equally 
+            important role as scale in global culinary success.
+          </p>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer>
-    © 2025 Calvin Wijaya · FIT3179 Data Visualisation 2
+    <div class="footer-meta">
+      © 2025 Calvin Wijaya · FIT3179 Data Visualisation 2
+    </div>
+    <div class="footer-links">
+      Dataset sources:
+      <a href="https://www.kaggle.com/datasets/mohdshahnawazaadil/restaurant-dataset?select=Dataset+.csv" target="_blank">Kaggle</a> ·
+      <a href="https://huggingface.co/datasets/itinerai/restaurants?" target="_blank">HuggingFace</a>
+    </div>
   </footer>
 
-  <!-- Vega Embeds -->
+
   <script>
-    vegaEmbed('#map', 'map.json', { actions: false, width: 1000, height: 600 });
-    vegaEmbed('#donut', 'donut_chart.json', { actions: false, width: 400, height: 400 });
-    vegaEmbed('#bar', 'bar_chart.json', { actions: false, width: 700, height: 500 });
-    vegaEmbed('#scatter', 'scatterplot.json', { actions: false, width: 700, height: 450 });
+    vegaEmbed('#map', 'map.json', { actions: false, width: 650, height: 450 });
+    vegaEmbed('#density_chart', 'density_chart.json', { actions: false, width: 650, height: 400 });
+    vegaEmbed('#bar', 'bar_chart.json', { actions: false, width: 650, height: 450 });
+    vegaEmbed('#scatter', 'scatterplot.json', { actions: false, width: 650, height: 450 });
   </script>
 </body>
 </html>

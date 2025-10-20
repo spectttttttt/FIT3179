@@ -1,0 +1,242 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://spectttttttt.github.io/FIT3179/A2/restaurant_data.json"
+  },
+  "params": [
+    {
+      "name": "showJapanese",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Japanese ",
+        "style": "display:inline-block; margin-right:10px;"
+      }
+    },
+    {
+      "name": "showItalian",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Italian ",
+        "style": "display:inline-block; margin-right:10px;"
+      }
+    },
+    {
+      "name": "showChinese",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Chinese ",
+        "style": "display:inline-block; margin-right:10px;"
+      }
+    },
+    {
+      "name": "showIndian",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Indian ",
+        "style": "display:inline-block; margin-right:10px;"
+      }
+    },
+    {
+      "name": "showFrench",
+      "value": false,
+      "bind": {
+        "input": "checkbox",
+        "name": "French ",
+        "style": "display:inline-block; margin-right:10px;"
+      }
+    },
+    {
+      "name": "showThai",
+      "value": false,
+      "bind": {
+        "input": "checkbox",
+        "name": "Thai ",
+        "style": "display:inline-block; margin-right:10px;"
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.RATING != null"},
+    {"flatten": ["CUISINES"]},
+    {"calculate": "toNumber(datum.RATING)", "as": "RATING_NUM"}
+  ],
+  "layer": [
+    {
+      "transform": [{"filter": "showJapanese && datum.CUISINES == 'Japanese'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.5,
+        "color": "#1f77b4"
+      },
+      "encoding": {
+        "x": {
+          "field": "RATING_NUM",
+          "type": "quantitative",
+          "bin": {"maxbins": 40},
+          "title": "Ratings"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Restaurants"
+        },
+        "tooltip": [
+          {"value": "Japanese"},
+          {"aggregate": "count", "title": "Restaurants"},
+          {"field": "RATING_NUM", "title": "Rating"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "showItalian && datum.CUISINES == 'Italian'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.5,
+        "color": "#e15759"
+      },
+      "encoding": {
+        "x": {
+          "field": "RATING_NUM",
+          "type": "quantitative",
+          "bin": {"maxbins": 40},
+          "title": "Ratings"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Restaurants"
+        },
+        "tooltip": [
+          {"value": "Italian"},
+          {"aggregate": "count", "title": "Restaurants"},
+          {"field": "RATING_NUM", "title": "Rating"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "showChinese && datum.CUISINES == 'Chinese'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.5,
+        "color": "#71e2d9"
+      },
+      "encoding": {
+        "x": {
+          "field": "RATING_NUM",
+          "type": "quantitative",
+          "bin": {"maxbins": 40},
+          "title": "Ratings"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Restaurants"
+        },
+        "tooltip": [
+          {"value": "Chinese"},
+          {"aggregate": "count", "title": "Restaurants"},
+          {"field": "RATING_NUM", "title": "Rating"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "showIndian && datum.CUISINES == 'Indian'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.5,
+        "color": "#f28e2b"
+      },
+      "encoding": {
+        "x": {
+          "field": "RATING_NUM",
+          "type": "quantitative",
+          "bin": {"maxbins": 40},
+          "title": "Ratings"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Restaurants"
+        },
+        "tooltip": [
+          {"value": "Indian"},
+          {"aggregate": "count", "title": "Restaurants"},
+          {"field": "RATING_NUM", "title": "Rating"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "showFrench && datum.CUISINES == 'French'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.5,
+        "color": "#9467bd"
+      },
+      "encoding": {
+        "x": {
+          "field": "RATING_NUM",
+          "type": "quantitative",
+          "bin": {"maxbins": 40},
+          "title": "Ratings"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Restaurants"
+        },
+        "tooltip": [
+          {"value": "French"},
+          {"aggregate": "count", "title": "Restaurants"},
+          {"field": "RATING_NUM", "title": "Rating"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "showThai && datum.CUISINES == 'Thai'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.5,
+        "color": "#9c9007"
+      },
+      "encoding": {
+        "x": {
+          "field": "RATING_NUM",
+          "type": "quantitative",
+          "bin": {"maxbins": 40},
+          "title": "Ratings"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Restaurants"
+        },
+        "tooltip": [
+          {"value": "Thai"},
+          {"aggregate": "count", "title": "Restaurants"},
+          {"field": "RATING_NUM", "title": "Rating"}
+        ]
+      }
+    }
+  ],
+  "title": {
+    "text": "Compare Restaurant Rating Distributions Across Cuisines",
+    "anchor": "middle",
+    "fontSize": 14
+  },
+  "config": {
+    "axis": {"labelFontSize": 11, "titleFontSize": 12},
+    "view": {"stroke": null}
+  }
+}

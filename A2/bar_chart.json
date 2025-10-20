@@ -43,7 +43,8 @@
           "field": "AVG_RATING",
           "type": "quantitative",
           "title": "Avg Rating",
-          "scale": {"scheme": "goldred", "domain": [4, 5]}
+          "scale": {"scheme": "greens", "domain": [4, 5]},
+          "legend": null
         },
         "tooltip": [
           {"field": "CUISINES", "title": "Cuisine"},
@@ -69,7 +70,7 @@
     }
   ],
   "title": {
-    "text": "Top 10 Cuisine Types by Average Rating (Global)",
+    "text": "🍽️ Top 10 Global Cuisines",
     "anchor": "middle",
     "fontSize": 14
   },
